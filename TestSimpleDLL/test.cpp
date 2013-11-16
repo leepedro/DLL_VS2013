@@ -17,7 +17,7 @@ void TestTakeArg(void)
 	double d_array[2] = { 3.0, 4.0 };
 	bool b_output;
 	int i_output;
-	TakeArg(true, 2, 3.0, d_array, &b_output, &i_output);
+	double d_output = TakeArg(true, 2, 3.0, d_array, &b_output, &i_output);
 }
 
 void TestVarArgEasy(void)
@@ -59,6 +59,7 @@ void TestVarArg(void)
 int main(void)
 {
 	TestReturnInt();
+	TestTakeArgEasy();
 	TestTakeArg();
 	TestVarArgEasy();
 	TestVarArg();
