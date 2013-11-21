@@ -44,13 +44,14 @@ def testTakeArg():
     b_in = True
     i_in = 2
     c_d_in = ctypes.c_double(3.0)
-    d_array_in = np.array([3.0, 4.0])
-    p_c_d_array = d_array_in.ctypes.data_as(ctypes.POINTER(ctypes.c_double))
+    d_array = np.array([3.0, 4.0])
+    p_c_d_array = d_array.ctypes.data_as(ctypes.POINTER(ctypes.c_double))
     c_b_out = ctypes.c_bool(False)
     c_i_out = ctypes.c_int(0)
     p_c_b_out = ctypes.pointer(c_b_out)
     p_c_i_out = ctypes.pointer(c_i_out)
-    print("Input = {0}, {1}, {2}, {3}".format(b_in, i_in, d_array_in[0], d_array_in[1]))
+    print("Input = {0}, {1}".format(b_in, i_in))
+    print("Ref (before) = {0}, {1}".format(d_array[0], d_array[1]))
     
     # Load a DLL file, get a function, and then call the function.
     lib1 = ctypes.WinDLL('SimpleDLL.dll')
@@ -63,6 +64,7 @@ def testTakeArg():
     
     # Check arguments again.
     print("Output = {0}, {1}, {2}".format(c_b_out.value, c_i_out.value, d_out))
+    print("Ref (after) = {0}, {1}".format(d_array[0], d_array[1]))
 
 
 def testTakeVarArgEasy():
@@ -107,8 +109,8 @@ def testTakeVarArg():
     p_c_i_in = ctypes.pointer(c_i_in)
     c_d_in = ctypes.c_double(3.0)
     p_c_d_in = ctypes.pointer(c_d_in)
-    d_array_in = np.array([4.0, 5.0])
-    p_c_d_array = d_array_in.ctypes.data_as(ctypes.POINTER(ctypes.c_double))
+    d_array = np.array([4.0, 5.0])
+    p_c_d_array = d_array.ctypes.data_as(ctypes.POINTER(ctypes.c_double))
     c_b_out = ctypes.c_bool(False)
     c_i_out = ctypes.c_int(0)
     p_c_b_out = ctypes.pointer(c_b_out)
@@ -123,8 +125,8 @@ def testTakeVarArg():
     argv[5] = ctypes.cast(p_c_i_out, ctypes.c_void_p)    
 #    for arg in argv:
 #        print(arg)
-    print("Input = {0}, {1}, {2}, {3}".format(c_b_in.value, c_i_in.value, d_array_in[0],
-          d_array_in[1]))
+    print("Input = {0}, {1}".format(c_b_in.value, c_i_in.value))
+    print("Ref (before) = {0}, {1}".format(d_array[0], d_array[1]))
 
     # Load a DLL file, get a function, and then call the function.
     lib1 = ctypes.WinDLL('SimpleDLL.dll')
@@ -133,6 +135,7 @@ def testTakeVarArg():
     funcTakeVarArg.restype = ctypes.c_double
     d_out = funcTakeVarArg(argv)
     print("Output = {0}, {1}, {2}".format(c_b_out.value, c_i_out.value, d_out))
+    print("Ref (after) = {0}, {1}".format(d_array[0], d_array[1]))
 
 
 if __name__ == '__main__':

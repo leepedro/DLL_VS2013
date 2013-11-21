@@ -53,7 +53,7 @@ void TestVarArg(void)
 	argv[4] = &b_output;
 	argv[5] = &i_output;
 
-	TakeVarArg(argv);
+	double d_output = TakeVarArg(argv);
 }
 
 int main(void)

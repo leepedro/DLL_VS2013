@@ -22,6 +22,8 @@ double TakeArg(bool b_in, int i_in, double d_in, double *p_d, bool *p_b, int *p_
 	double d_array_1 = *(p_d + 1);
 	*p_b = !b_in;
 	*p_i = i_in + 1;
+	*p_d = *p_d + 10.0;
+	*(p_d + 1) = *(p_d + 1) + 10.0;
 	return d_array_0 + d_array_1;
 }
 
@@ -51,5 +53,7 @@ double TakeVarArg(void *argv[])
 
 	*p_b = !b_in;
 	*p_i = i_in + 1;
+	*p_d = *p_d + 10.0;
+	*(p_d + 1) = *(p_d + 1) + 10.0;
 	return d_array_0 + d_array_1;
 }
