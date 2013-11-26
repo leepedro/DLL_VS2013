@@ -16,15 +16,28 @@ void TakeArgEasy(bool b_in, int i_in, double d_in, bool *p_b, int *p_i)
 	*p_i = i_in + 1;
 }
 
-double TakeArg(bool b_in, int i_in, double d_in, double *p_d, bool *p_b, int *p_i)
+double TakeArg(bool b_in, int i_in, double d_in, double *p_d, ::size_t sz_d, bool *p_b, int *p_i, int *p_i2, ::size_t sz_i)
 {
-	double d_array_0 = *p_d;
-	double d_array_1 = *(p_d + 1);
+	// Change output value according to given input values.
 	*p_b = !b_in;
 	*p_i = i_in + 1;
-	*p_d = *p_d + 10.0;
-	*(p_d + 1) = *(p_d + 1) + 10.0;
-	return d_array_0 + d_array_1;
+
+	for (::size_t count = 0; count < sz_i; ++count)
+	{
+		// Change the content of an input/output array.
+		*(p_i2 + count) = *(p_i2 + count) + 10;
+	}
+
+	double d_output(0.0);
+	for (::size_t count = 0; count < sz_d; ++count)
+	{
+		// Change output value according to a given array.
+		d_output += *(p_d + count);
+
+		// Change the content of an input/output array.
+		*(p_d + count) = *(p_d + count) + 10.0;
+	}
+	return d_output;
 }
 
 void TakeVarArgEasy(void *argv[])
@@ -47,13 +60,16 @@ double TakeVarArg(void *argv[])
 	double *p_d = (double *)(argv[3]);
 	double d_array_0 = *p_d;
 	double d_array_1 = *(p_d + 1);
+	int *p_i_array = (int *)(argv[4]);
 
-	bool *p_b = (bool *)(argv[4]);
-	int *p_i = (int *)(argv[5]);
+	bool *p_b = (bool *)(argv[5]);
+	int *p_i = (int *)(argv[6]);
 
 	*p_b = !b_in;
 	*p_i = i_in + 1;
 	*p_d = *p_d + 10.0;
 	*(p_d + 1) = *(p_d + 1) + 10.0;
+	*p_i_array = *p_i_array + 10;
+	*(p_i_array + 1) = *(p_i_array + 1) + 10;
 	return d_array_0 + d_array_1;
 }

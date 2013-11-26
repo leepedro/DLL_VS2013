@@ -14,10 +14,12 @@ void TestTakeArgEasy(void)
 
 void TestTakeArg(void)
 {
-	double d_array[2] = { 4.0, 5.0 };
+	const ::size_t SZ = 2;
+	double d_array[SZ] = { 4.0, 5.0 };
+	int i_array[SZ] = { 4, 5 };
 	bool b_output;
 	int i_output;
-	double d_output = TakeArg(true, 2, 3.0, d_array, &b_output, &i_output);
+	double d_output = TakeArg(true, 2, 3.0, d_array, SZ, &b_output, &i_output, i_array, SZ);
 }
 
 void TestVarArgEasy(void)
